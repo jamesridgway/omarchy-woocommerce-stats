@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "id": "jamesridgway.woocommerce",
+  "name": "Store Stats for WooCommerce",
+  "version": "1.1.2",
+  "author": "James Ridgway",
+  "license": "MIT",
+  "description": "Revenue, profit and order counts from any WooCommerce store in the Omarchy bar.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Store Stats for WooCommerce",
+    "description": "Shows revenue, profit, margin and orders for a WooCommerce store. Add one widget per store, each with its own profile.",
+    "category": "Status",
+    "allowMultiple": true,
+    "defaultSection": "right",
+    "defaults": {
+      "profile": "default",
+      "barFormat": "󰄐 {revenue} · {orders} · {margin}",
+      "barPeriod": "today",
+      "refreshIntervalSec": 300,
+      "historyRefreshMin": 60,
+      "statuses": "processing,completed",
+      "costMetaKeys": "",
+      "assumedMarginPercent": 0
+    },
+    "schema": [
+      {
+        "key": "profile",
+        "type": "string",
+        "label": "Store profile",
+        "defaultValue": "default",
+        "description": "Name of the store's saved connection. Use a different name for each store."
+      },
+      {
+        "key": "barFormat",
+        "type": "string",
+        "label": "Bar text",
+        "defaultValue": "󰄐 {revenue} · {orders} · {margin}",
+        "description": "Available fields: {revenue} {gross} {profit} {margin} {orders} {aov} {period}. Use just an icon to keep figures off the bar."
+      },
+      {
+        "key": "barPeriod",
+        "type": "enum",
+        "label": "Bar period",
+        "options": [
+          "today",
+          "yesterday",
+          "wtd",
+          "last_week",
+          "7d",
+          "30d",
+          "90d",
+          "mtd",
+          "last_month",
+          "qtd",
+          "last_quarter",
+          "ytd",
+          "last_year"
+        ],
+        "defaultValue": "today"
+      },
+      {
+        "key": "refreshIntervalSec",
+        "type": "integer",
+        "label": "Refresh interval (seconds)",
+        "min": 60,
+        "max": 3600,
+        "step": 30,
+        "defaultValue": 300,
+        "description": "How often today's orders are fetched."
+      },
+      {
+        "key": "historyRefreshMin",
+        "type": "integer",
+        "label": "History refresh (minutes)",
+        "min": 5,
+        "max": 1440,
+        "step": 5,
+        "defaultValue": 60,
+        "description": "How often earlier days are re-fetched to pick up refunds and status changes."
+      },
+      {
+        "key": "statuses",
+        "type": "string",
+        "label": "Order statuses counted (comma separated)",
+        "defaultValue": "processing,completed",
+        "description": "Add on-hold if you count bank transfer orders before payment arrives."
+      },
+      {
+        "key": "costMetaKeys",
+        "type": "string",
+        "label": "Extra per-unit cost meta keys (comma separated)",
+        "defaultValue": "",
+        "description": "For cost plugins not detected automatically. Checked on order lines and products."
+      },
+      {
+        "key": "assumedMarginPercent",
+        "type": "integer",
+        "label": "Assumed margin for uncosted products (%)",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "defaultValue": 0,
+        "description": "0 leaves these products out of profit. Anything else adds an estimate, marked with ~."
+      }
+    ]
+  }
+}
