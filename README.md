@@ -2,7 +2,8 @@
 
 Shows revenue, profit, margin and order counts from any WooCommerce store in
 the Omarchy bar. It uses a read-only API key and needs nothing installed on the
-store. Python 3 is the only requirement, and Omarchy already includes it.
+store. Python 3 is the only requirement, and Omarchy already includes it. If
+`secret-tool` is installed, the API key is kept in your keyring.
 
 ```
 󰄐 £1,284 · 17 · 34%
@@ -28,6 +29,22 @@ omarchy plugin add https://github.com/jamesridgway/omarchy-woocommerce-stats.git
 ```
 
 For development, run `./install.sh` from a checkout instead.
+
+## Remove
+
+```bash
+omarchy plugin remove jamesridgway.woocommerce
+```
+
+That takes the widget off your bar and leaves your store connection in place, so
+reinstalling doesn't need setup again. To delete that too, including the API key:
+
+```bash
+secret-tool clear application omarchy-woocommerce
+rm -rf ~/.config/omarchy-woocommerce ~/.cache/omarchy-woocommerce
+```
+
+You can also revoke the key under WooCommerce > Settings > Advanced > REST API.
 
 ## Store requirements
 
