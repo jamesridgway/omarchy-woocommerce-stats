@@ -14,7 +14,7 @@ Click for a daily trend chart and a table of the periods you choose.
 | Input | Action |
 |---|---|
 | Left click | Open the panel |
-| Middle click, or `r` in the panel | Refresh now |
+| Middle click, refresh icon, or `r` in the panel | Refresh now |
 | Right click, or `o` in the panel | Open WooCommerce analytics |
 | Gear icon, or `s` in the panel | Choose breakdowns, trend length and week start |
 | `m` in the panel | Switch the chart between revenue, profit and orders |

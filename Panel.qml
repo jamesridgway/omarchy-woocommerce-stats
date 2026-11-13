@@ -274,11 +274,11 @@ Panel {
 
           Item {
             width: parent.width
-            implicitHeight: Math.max(hero.implicitHeight, gearButton.implicitHeight)
+            implicitHeight: Math.max(hero.implicitHeight, actions.implicitHeight)
 
             PanelHero {
               id: hero
-              width: parent.width - gearButton.width - Style.space(8)
+              width: parent.width - actions.width - Style.space(8)
               anchors.verticalCenter: parent.verticalCenter
               title: root.stats.store ? root.stats.store.name : "WooCommerce"
               meta: root.refreshing ? "Refreshing…" : (root.stats.updated ? "Updated " + root.stats.updated : "")
@@ -294,16 +294,30 @@ Panel {
               }
             }
 
-            PanelActionButton {
-              id: gearButton
+            Row {
+              id: actions
               anchors.right: parent.right
               anchors.verticalCenter: parent.verticalCenter
-              visible: root.catalog.length > 0
-              iconText: root.settingsOpen ? "󰁍" : "󰒓"
-              tooltipText: root.settingsOpen ? "Back" : "Panel settings"
-              foreground: root.foreground
-              fontFamily: root.fontFamily
-              onClicked: root.settingsOpen = !root.settingsOpen
+              spacing: Style.space(4)
+
+              PanelActionButton {
+                visible: !root.needsSetup && !root.settingsOpen
+                enabled: !root.refreshing
+                iconText: "󰑐"
+                tooltipText: root.refreshing ? "Refreshing…" : "Refresh now"
+                foreground: root.foreground
+                fontFamily: root.fontFamily
+                onClicked: root.refresh(true)
+              }
+
+              PanelActionButton {
+                visible: root.catalog.length > 0
+                iconText: root.settingsOpen ? "󰁍" : "󰒓"
+                tooltipText: root.settingsOpen ? "Back" : "Panel settings"
+                foreground: root.foreground
+                fontFamily: root.fontFamily
+                onClicked: root.settingsOpen = !root.settingsOpen
+              }
             }
           }
 
